@@ -26,7 +26,7 @@ socketio = SocketIO(app, async_mode=async_mode, logger=True, engineio_logger=Tru
 thread = Thread()
 thread_stop_event = Event()
 
-sec = 40
+sec = 30
 
 def db_read():
     cluster = Cluster([host], port=port)
