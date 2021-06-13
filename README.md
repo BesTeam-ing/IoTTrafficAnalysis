@@ -16,6 +16,8 @@ Scala - 2.11.8
 
 Flask - 2.0.1
 
+Python - 3.7
+
 # Run
 
 ```
