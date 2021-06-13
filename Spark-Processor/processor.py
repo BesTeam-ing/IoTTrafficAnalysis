@@ -40,7 +40,9 @@ lines = lines.map(lambda x: DenseVector(x))
 
 lines.pprint()
 
-model = StreamingKMeans(k=3, decayFactor=0.01).setRandomCenters(2, 1.0, 0)
+#model = StreamingKMeans(k=3, decayFactor=0.01).setRandomCenters(2, 1.0, 0)
+initCenters = [[33.0, -96.0], [34.0, -97.0], [35.0, -98.0]]
+model = StreamingKMeans(k=3, decayFactor=0.01).setInitialCenters(initCenters, [1.0, 1.0, 1.0])
 model.trainOn(lines)
 
 ssc.start()
