@@ -10,7 +10,7 @@ from cassandra.cluster import Cluster
 
 __author__ = 'Besteaming'
 
-host = 'localhost'
+host = '10.154.0.11'
 port = '9042'
 keyspace = 'traffickeyspace'
 
@@ -26,7 +26,7 @@ socketio = SocketIO(app, async_mode=async_mode, logger=True, engineio_logger=Tru
 thread = Thread()
 thread_stop_event = Event()
 
-sec = 30
+sec = 10
 
 def db_read():
     cluster = Cluster([host], port=port)
