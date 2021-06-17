@@ -5,6 +5,10 @@ import uuid
 import random
 from datetime import datetime
 
+from configparser import ConfigParser
+config = ConfigParser()
+config.read('../configuration.ini')
+
 def getCoordinates(routeId):
     if routeId == "Route-37":
         latPrefix = 33
@@ -15,7 +19,7 @@ def getCoordinates(routeId):
     elif routeId == "Route-43":
         latPrefix = 35
         longPrefix = -98
-    
+
     lati = int(latPrefix) + float("{:.6f}".format(random.random()))
     longi = int(longPrefix) + float("{:.6f}".format(random.random()))
 
@@ -26,7 +30,7 @@ def generateIoTEvent(producer, topic):
     routeList = ["Route-37", "Route-43", "Route-82"]
     vehicleTypeList = ["Large Truck", "Small Truck", "Private Car", "Bus", "Taxi"]
     print("Sending events")
-    
+
     while True:
         eventList = []
         for i in range(0, 100):
@@ -49,9 +53,9 @@ def generateIoTEvent(producer, topic):
             sleep(random.randint(0,3) + 1)
 
 if __name__ == "__main__":
-    brokers = "localhost:9092"
-    topic = "iot-data-event"
-    zk = "localhost:2181"
+    brokers = config.get('CONFIG', 'kafka_brokers')
+    topic = config.get('CONFIG', 'kafka_topic')
+    zk = config.get('CONFIG', 'zookeeper')
 
     producer = KafkaProducer(bootstrap_servers=[brokers],
                              value_serializer=lambda x: dumps(x).encode('utf-8'))

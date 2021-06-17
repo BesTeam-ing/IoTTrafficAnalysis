@@ -1,6 +1,6 @@
-# Start with a basic flask app webpage.
 from flask_socketio import SocketIO, emit
 from flask import Flask, render_template, url_for, copy_current_request_context
+
 from random import random
 from time import sleep
 from threading import Thread, Event
@@ -8,11 +8,15 @@ import datetime
 
 from cassandra.cluster import Cluster
 
+from configparser import ConfigParser
+config = ConfigParser()
+config.read('../configuration.ini')
+
 __author__ = 'Besteaming'
 
-host = '10.154.0.11'
-port = '9042'
-keyspace = 'traffickeyspace'
+host = config.get('CONFIG', 'cassandra_host')
+port = config.get('CONFIG', 'cassandra_port')
+keyspace = config.get('CONFIG', 'cassandra_keyspace')
 
 app = Flask(__name__)
 app.config['SECRET_KEY'] = 'secret!'
